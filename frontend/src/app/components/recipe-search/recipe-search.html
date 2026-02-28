@@ -1,0 +1,72 @@
+<section class="recipe-search">
+  <h2>🍳 Recipe Recommendations</h2>
+
+  <div class="search-form">
+    <div class="form-group">
+      <label for="query">What would you like to cook?</label>
+      <input
+        id="query"
+        type="text"
+        [(ngModel)]="query"
+        placeholder="e.g. a healthy pasta dish for dinner"
+        (keyup.enter)="search()"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="dietary">Dietary preferences (comma-separated)</label>
+      <input
+        id="dietary"
+        type="text"
+        [(ngModel)]="dietaryPreferences"
+        placeholder="e.g. vegetarian, gluten-free"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="ingredients">Available ingredients (comma-separated)</label>
+      <input
+        id="ingredients"
+        type="text"
+        [(ngModel)]="availableIngredients"
+        placeholder="e.g. chicken, tomatoes, garlic"
+      />
+    </div>
+
+    <div class="form-group form-group--inline">
+      <label for="maxResults">Number of recipes:</label>
+      <input
+        id="maxResults"
+        type="number"
+        [(ngModel)]="maxResults"
+        min="1"
+        max="5"
+        class="input--small"
+      />
+    </div>
+
+    <button class="btn btn--primary" (click)="search()" [disabled]="loading()">
+      @if (loading()) {
+        Searching...
+      } @else {
+        Get Recommendations
+      }
+    </button>
+  </div>
+
+  @if (error()) {
+    <div class="alert alert--error">{{ error() }}</div>
+  }
+
+  @if (message()) {
+    <p class="search-message">{{ message() }}</p>
+  }
+
+  @if (recipes().length > 0) {
+    <div class="recipe-grid">
+      @for (recipe of recipes(); track recipe.id) {
+        <app-recipe-card [recipe]="recipe" />
+      }
+    </div>
+  }
+</section>

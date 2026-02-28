@@ -1,0 +1,49 @@
+<section class="recipe-chat">
+  <h2>💬 Chat with AI Assistant</h2>
+
+  <div class="chat-messages" #messagesContainer>
+    @if (history().length === 0) {
+      <div class="chat-empty">
+        <p>Ask me anything about cooking! For example:</p>
+        <ul>
+          <li>"What can I make with chicken and broccoli?"</li>
+          <li>"How do I substitute butter in baking?"</li>
+          <li>"Tips for making fluffy pancakes?"</li>
+        </ul>
+      </div>
+    }
+
+    @for (msg of history(); track $index) {
+      <div class="chat-message" [class.chat-message--user]="msg.role === 'user'" [class.chat-message--assistant]="msg.role === 'assistant'">
+        <span class="chat-message__avatar">{{ msg.role === 'user' ? '🧑' : '🤖' }}</span>
+        <div class="chat-message__bubble">{{ msg.content }}</div>
+      </div>
+    }
+
+    @if (loading()) {
+      <div class="chat-message chat-message--assistant">
+        <span class="chat-message__avatar">🤖</span>
+        <div class="chat-message__bubble chat-message__bubble--typing">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    }
+  </div>
+
+  @if (error()) {
+    <div class="alert alert--error">{{ error() }}</div>
+  }
+
+  <div class="chat-input">
+    <input
+      type="text"
+      [(ngModel)]="userInput"
+      placeholder="Ask about recipes, ingredients, cooking techniques..."
+      (keyup.enter)="send()"
+      [disabled]="loading()"
+    />
+    <button class="btn btn--primary" (click)="send()" [disabled]="loading() || !userInput.trim()">
+      Send
+    </button>
+  </div>
+</section>
