@@ -1,0 +1,93 @@
+.recipe-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+
+  &:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  }
+
+  &__header {
+    padding: 1.2rem;
+    cursor: pointer;
+
+    h3 {
+      margin: 0 0 0.5rem;
+      font-size: 1.1rem;
+      color: #222;
+    }
+  }
+
+  &__meta {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.85rem;
+    color: #888;
+    margin-bottom: 0.6rem;
+  }
+
+  &__description {
+    font-size: 0.9rem;
+    color: #555;
+    margin: 0 0 0.8rem;
+    line-height: 1.4;
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 0.8rem;
+  }
+
+  &__toggle {
+    background: none;
+    border: none;
+    color: #e8732a;
+    font-size: 0.85rem;
+    cursor: pointer;
+    padding: 0;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__details {
+    padding: 0 1.2rem 1.2rem;
+    border-top: 1px solid #f0f0f0;
+  }
+
+  &__section {
+    margin-top: 1rem;
+
+    h4 {
+      font-size: 0.95rem;
+      color: #444;
+      margin-bottom: 0.5rem;
+    }
+
+    ul,
+    ol {
+      padding-left: 1.2rem;
+      margin: 0;
+
+      li {
+        font-size: 0.88rem;
+        color: #555;
+        line-height: 1.6;
+      }
+    }
+  }
+}
+
+.tag {
+  background: #fff3ec;
+  color: #e8732a;
+  border: 1px solid #f5c8a8;
+  border-radius: 20px;
+  padding: 0.2rem 0.6rem;
+  font-size: 0.75rem;
+}

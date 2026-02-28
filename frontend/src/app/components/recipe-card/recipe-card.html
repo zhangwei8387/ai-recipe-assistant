@@ -1,0 +1,41 @@
+<article class="recipe-card">
+  <div class="recipe-card__header" (click)="toggleExpand()">
+    <h3>{{ recipe().title }}</h3>
+    <div class="recipe-card__meta">
+      <span>⏱ {{ recipe().prep_time_minutes + recipe().cook_time_minutes }} min</span>
+      <span>👥 {{ recipe().servings }} servings</span>
+    </div>
+    <p class="recipe-card__description">{{ recipe().description }}</p>
+    @if (recipe().tags.length > 0) {
+      <div class="recipe-card__tags">
+        @for (tag of recipe().tags; track tag) {
+          <span class="tag">{{ tag }}</span>
+        }
+      </div>
+    }
+    <button class="recipe-card__toggle">
+      {{ expanded() ? '▲ Hide details' : '▼ Show details' }}
+    </button>
+  </div>
+
+  @if (expanded()) {
+    <div class="recipe-card__details">
+      <div class="recipe-card__section">
+        <h4>Ingredients</h4>
+        <ul>
+          @for (ing of recipe().ingredients; track ing.name) {
+            <li>{{ ing.amount }} {{ ing.unit }} {{ ing.name }}</li>
+          }
+        </ul>
+      </div>
+      <div class="recipe-card__section">
+        <h4>Steps</h4>
+        <ol>
+          @for (step of recipe().steps; track $index) {
+            <li>{{ step }}</li>
+          }
+        </ol>
+      </div>
+    </div>
+  }
+</article>
